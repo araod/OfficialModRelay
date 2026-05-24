@@ -1,9 +1,10 @@
-🚔 **OfficialModRelay - Mod Team Escalation & Shift Handoff Tool**
+# 🚔 OfficialModRelay - Mod Team Escalation & Shift Handoff                Tool
 
+> **Reddit "Mod Tools & Migrated Apps" Hackathon Submission**
 
 ---
 
-**What is OfficialModRelay?**
+## What is OfficialModRelay?
 
 OfficialModRelay is a Devvit-powered mod team CRM (Customer Relationship Manager) that solves the **#1 coordination problem** for large subreddit mod teams: *information dying when a shift ends.*
 
@@ -16,9 +17,9 @@ OfficialModRelay fills that gap entirely.
 
 ---
 
-**Features**
+## Features
 
-👀 **Watch Flags**
+### 👀 Watch Flags
 Flag problem users with four escalation levels:
 | Level | Meaning |
 |-------|---------|
@@ -31,21 +32,21 @@ Flag problem users with four escalation levels:
 - Automatically logs a note when a flag is set or cleared
 - Cleared flags are archived (not deleted) for full audit trail
 
-📝 **Mod Notes**
+### 📝 Mod Notes
 Leave structured notes on **users** and **posts**:
 - Categories: General, Rule Violation, Escalation, Ban Warning, Positive/Resolved, Shift Note
 - Notes persist in Redis — visible to all mods, all shifts
 - Each note has a unique ID for easy resolving
 - Notes show: author mod, time ago, target, category icon
 
-🔄 **Shift Handoff Generator**
+### 🔄 Shift Handoff Generator
 One click generates a full handoff:
 - Mod writes a shift summary + manual open items
 - App **auto-compiles** all unresolved notes + active watch flags
 - Posts a distinguished mod post to the subreddit
 - Handoff is also stored in Redis so the dashboard can surface the last 3
 
-📊 **Live Dashboard (Custom Post)**
+### 📊 Live Dashboard (Custom Post)
 A pinned interactive dashboard post showing:
 - **Watch List tab** – all active watch flags with level, reason, flagging mod
 - **Mod Notes tab** – 30 most recent notes, resolved/unresolved status, note IDs
@@ -53,38 +54,38 @@ A pinned interactive dashboard post showing:
 
 ---
 
-**How Mods Use It**
+## How Mods Use It
 
-   **During a shift:**
+### During a shift:
 1. See a problem user on a post → **Post menu → "🚨 OfficialModRelay: Flag User for Watch"**
 2. Need to leave context on a post → **Post menu → "📝 OfficialModRelay: Add Note to Post"**
 3. Need to note something about a user → **Post menu → "👤 OfficialModRelay: Add Note to Post Author"**
 
-**At end of shift:**
+### At end of shift:
 5. **Subreddit menu → "🔄 OfficialModRelay: Generate Shift Handoff"** → type summary → post is auto-created
 
-**Any time:**
+### Any time:
 6. **Subreddit menu → "📊 OfficialModRelay: Open Dashboard"** → pinned post with live data
 7. **Subreddit menu → "✅ OfficialModRelay: Clear User Watch Flag"** → clear a resolved situation
 8. **Dashboard → Mod Notes tab → tap "✔ Resolve"** on any note to resolve it directly
 
 ---
 
-  **Project Impact**
+## Project Impact
 
-  **Communities that would benefit immediately:**
+### Communities that would benefit immediately:
 1. **r/AskReddit** (34M+ members) – Massive mod team across timezones. Shift handoffs are a constant coordination challenge.
 2. **r/worldnews** (32M+ members) – Fast-moving news events require rapid escalation of bad actors across shifts.
 3. **r/gaming** (39M+ members) – Regular drama events, ban waves, and watch-listed users need cross-mod tracking.
 
-   **Time savings estimate:**
+### Time savings estimate:
 - Average large subreddit mod spends **15–30 minutes per shift** on "catch-up" from reading modmail and mod logs.
 - OfficialModRelay's handoff post + dashboard reduces this to **2–3 minutes** of reading.
 - Watch flags eliminate duplicated work where multiple mods unknowingly handle the same user.
 
 ---
 
-  **Technical Architecture**
+## Technical Architecture
 
 ```
 modrelay/
@@ -97,7 +98,7 @@ modrelay/
     └── redis-helpers.ts # All Redis read/write operations
 ```
 
-   **Data Model (Redis)**
+### Data Model (Redis)
 
 | Key Pattern | Type | Purpose |
 |-------------|------|---------|
@@ -106,7 +107,7 @@ modrelay/
 | `modrelay:handoffs:{sub}` | Sorted Set (score=createdAt) | Shift handoffs |
 | `modrelay:lasthandoffpost:{sub}` | String | Last handoff post ID |
 
-   **Devvit APIs Used**
+### Devvit APIs Used
 - `Devvit.addMenuItem` – 7 menu items across post and subreddit contexts
 - `Devvit.createForm` – 6 interactive forms for data entry
 - `Devvit.addCustomPostType` – Live dashboard with 3-tab navigation
@@ -116,7 +117,7 @@ modrelay/
 
 ---
 
- **Installation (Developers)**
+## Installation (Developers)
 
 ```bash
 # Prerequisites: Node.js 18+, devvit CLI
@@ -137,7 +138,7 @@ devvit upload
 devvit dev
 ```
 
-   **Installation (Moderators)**
+## Installation (Moderators)
 
 1. Go to [developers.reddit.com](https://developers.reddit.com)
 2. Search for **OfficialModRelay**
@@ -146,7 +147,7 @@ devvit dev
 
 ---
 
-   **Devvit Rules Compliance**
+## Devvit Rules Compliance
 
 - ✅ No external HTTP calls (all data stays in Reddit's Redis)
 - ✅ Moderator-only menu items (`forUserType: 'moderator'`)
@@ -156,7 +157,7 @@ devvit dev
 
 ---
 
-  **Roadmap (Post-Hackathon)**
+## Roadmap (Post-Hackathon)
 
 - [ ] Modmail integration – link notes to modmail threads
 - [ ] Discord webhook notifications for critical-level watch flags

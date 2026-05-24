@@ -1,0 +1,23 @@
+{
+  "name": "officialmodrelay",
+  "version": "0.0.0",
+  "description": "OfficialModRelay – Mod team escalation, shift handoff, and watch-flag CRM for Reddit moderators",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "devvit build",
+    "dev": "devvit dev",
+    "upload": "devvit upload",
+    "lint": "eslint src --ext .ts,.tsx",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@devvit/public-api": "0.12.24"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "typescript": "^5.0.0"
+  },
+  "type": "module",
+  "private": true,
+  "license": "BSD-3-Clause"
+}
